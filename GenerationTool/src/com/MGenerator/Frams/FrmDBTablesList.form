@@ -168,9 +168,6 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtFile">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="D:\u005cworkspace\u005cSVN\u005ccommon\u005cGenerationTool\u005cmybatisTemplate.properties" containsInvalidXMLChars="true"/>
-              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="-20" y="0" width="320" height="20"/>
@@ -195,9 +192,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="saveToTxt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="C:/Users/m00309430/Documents/output"/>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="20" y="490" width="200" height="-1"/>

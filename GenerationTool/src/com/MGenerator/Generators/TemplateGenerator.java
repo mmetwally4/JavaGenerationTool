@@ -38,14 +38,21 @@ public class TemplateGenerator extends Generator {
     public TemplateGenerator() {
     }
 
-    public static String getPropValue(String propName, Properties prop) {
+    public static String getPropValue(String propName, Properties prop, SettingDetails settingDetails) {
         String propVal = "";
+        StringBuilder filePath = new StringBuilder();
         if (propName.contains("_file")) {
             propVal = prop.getProperty(propName);
             if (propVal == null || propVal.isEmpty()) {
                 propVal = "";
             } else {
-                File f = new File(propVal);
+                filePath.append(getDirPath(settingDetails.getTemplatePath()));
+                if(propVal.startsWith("/")){
+                    propVal = propVal.substring(1);
+                }
+                filePath.append(propVal);
+                System.err.println("propName is File path = " + filePath.toString());
+                File f = new File(filePath.toString());
                 if (f.exists()) {
                     try {
                         propVal = Parser.convertStreamToString(new FileInputStream(f));
@@ -63,7 +70,19 @@ public class TemplateGenerator extends Generator {
         return propVal;
     }
 
-    public void generate(TableBean tblBean,SettingDetails settingDetails , Properties prop) {
+    public static String getDirPath(String fileFullPath) {
+        String dirPath = "";
+        File f = new File(fileFullPath);
+        if (f != null && f.isFile()) {
+            dirPath = f.getParent();
+            if(!dirPath.endsWith("/")){
+                dirPath += "/";
+            }
+        }
+        return dirPath;
+    }
+
+    public void generate(TableBean tblBean, SettingDetails settingDetails, Properties prop) {
         File file;
         FileOutputStream fos = null;
         userKeysMap = new HashMap();
@@ -82,7 +101,7 @@ public class TemplateGenerator extends Generator {
         Enumeration enNames = prop.propertyNames();
         while (enNames.hasMoreElements()) {
             propName = enNames.nextElement().toString();
-            propVal = getPropValue(propName, prop);
+            propVal = getPropValue(propName, prop,settingDetails);
             check = false;
             if (!userDefinedKeys.contains(propName) && !propName.equals("userKeys")) {
                 if (propName.contains("_repeat")) {
@@ -101,7 +120,7 @@ public class TemplateGenerator extends Generator {
                             }
                         } else if (propName.toLowerCase().contains("processor.java")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("processor", Parser.refineName(tblBean.getTblName(), 1) + "ManagerProcessor"));
@@ -114,7 +133,7 @@ public class TemplateGenerator extends Generator {
                             //classhandler
                         } else if (propName.toLowerCase().contains("processor")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/processors/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/processors/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("processor", Parser.refineName(tblBean.getTblName(), 1) + "ManagerProcessor"));
@@ -128,7 +147,7 @@ public class TemplateGenerator extends Generator {
                             //classhandler
                         } else if (propName.toLowerCase().contains("manager")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/handler/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/handler/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("manager", Parser.refineName(tblBean.getTblName(), 1) + "Managment"));
@@ -141,7 +160,7 @@ public class TemplateGenerator extends Generator {
                             //cxf_manager
                         } else if (propName.toLowerCase().contains("requestbean")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/handler/inputmodel/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/handler/inputmodel/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("RequestBean", Parser.refineName(tblBean.getTblName(), 1) + "RequestBean"));
@@ -155,7 +174,7 @@ public class TemplateGenerator extends Generator {
                             //cxf_manager
                         } else if (propName.toLowerCase().contains("responsebean")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/handler/outputmodel/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/cxf/handler/outputmodel/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("ResponseBean", Parser.refineName(tblBean.getTblName(), 1) + "ResponseBean"));
@@ -169,7 +188,7 @@ public class TemplateGenerator extends Generator {
                             //cxf_manager
                         } else if (propName.toLowerCase().contains("classdaobase")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/base/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/base/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("classDAOBase", Parser.refineName(tblBean.getTblName(), 1) + "DAOBase"));
@@ -182,7 +201,7 @@ public class TemplateGenerator extends Generator {
                             //gwtclass
                         } else if (propName.toLowerCase().contains("classdao")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/dao/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/dao/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("classDAO", Parser.refineName(tblBean.getTblName(), 1) + "DAO"));
@@ -195,7 +214,7 @@ public class TemplateGenerator extends Generator {
                             //gwtclass
                         } else if (propName.toLowerCase().contains("classhandler")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/servlets/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/servlets/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("classhandler", Parser.refineName(tblBean.getTblName(), 1) + "Handler"));
@@ -208,7 +227,7 @@ public class TemplateGenerator extends Generator {
                             //gwtclass
                         } else if (propName.toLowerCase().contains("class.jsp")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/Pages/displaytable/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/Pages/displaytable/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("class.jsp", Parser.refineName(tblBean.getTblName(), 1) + ".jsp"));
@@ -221,7 +240,7 @@ public class TemplateGenerator extends Generator {
                             //gwtclass
                         } else if (propName.toLowerCase().contains("class_jquery.jsp")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/Pages/jquery/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/Pages/jquery/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("class_Jquery.jsp", Parser.refineName(tblBean.getTblName(), 2) + ".jsp"));
@@ -234,7 +253,7 @@ public class TemplateGenerator extends Generator {
                             //gwtclass
                         } else if (propName.toLowerCase().contains("classtable.jsp")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/Pages/jquery/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/Pages/jquery/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("classTable.jsp", Parser.refineName(tblBean.getTblName(), 2) + "Table.jsp"));
@@ -247,7 +266,7 @@ public class TemplateGenerator extends Generator {
                             //gwtclass
                         } else if (propName.toLowerCase().contains("modelpanel")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/panels/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/panels/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("modelPanel.java", Parser.refineName(tblBean.getTblName(), 1) + "Panel.java").replace("modelPanel.form", Parser.refineName(tblBean.getTblName(), 1) + "Panel.form"));
@@ -260,7 +279,7 @@ public class TemplateGenerator extends Generator {
                             //gwtclass
                         } else if (propName.toLowerCase().contains("modeltablemodel")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/panels/models/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/panels/models/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("modelTableModel", Parser.refineName(tblBean.getTblName(), 1) + "TableModel"));
@@ -273,7 +292,7 @@ public class TemplateGenerator extends Generator {
                             //gwtclass
                         } else if (propName.toLowerCase().contains("gwtclass")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/gwt/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/gwt/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("gwtclass", "Gwt" + Parser.refineName(tblBean.getTblName(), 1)));
@@ -285,7 +304,7 @@ public class TemplateGenerator extends Generator {
                             }
                         } else if (propName.toLowerCase().contains("class.java")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/model/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/model/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("class", Parser.refineName(tblBean.getTblName(), 1)));
@@ -297,7 +316,7 @@ public class TemplateGenerator extends Generator {
                             }
                         } else if (propName.toLowerCase().contains("class")) {
                             try {
-                                dirs =  settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/";
+                                dirs = settingDetails.getOutPath() + "/" + settingDetails.getDaoPackage().replace(".", "/") + "/";
                                 file = new File(dirs);
                                 file.mkdirs();
                                 file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("class", Parser.refineName(tblBean.getTblName(), 1)));
@@ -339,8 +358,8 @@ public class TemplateGenerator extends Generator {
             }
         }
 
-
     }
+
     public String getStringToFile(String strToFile) {
 //        strToFile = strToFile.replace(";", ";\n");
 //        strToFile = strToFile.replace("{", "{\n");
@@ -371,7 +390,7 @@ public class TemplateGenerator extends Generator {
         Enumeration enNames = prop.propertyNames();
         while (enNames.hasMoreElements()) {
             propName = enNames.nextElement().toString();
-            propVal = getPropValue(propName, prop);
+            propVal = getPropValue(propName, prop,settingDetails);
             propName = propName.replace("_file", "");
             check = false;
             if (!userDefinedKeys.contains(propName) && !propName.equals("userKeys")) {

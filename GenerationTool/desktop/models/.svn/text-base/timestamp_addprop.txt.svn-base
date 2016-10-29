@@ -1,8 +1,0 @@
-
-	                                
-
-	                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, {classNamelow}PanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent({propName}Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-			.addGap(18, 18, 18)
-                        .addComponent({propName}DateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))

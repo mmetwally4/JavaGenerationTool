@@ -1,8 +1,0 @@
-                    
-		    try{                
-                        if(paramName.equalsIgnoreCase("{propName}")){
-                            {classNamelow}.set{propNameC}(request.getParameterValues(paramName)[0]);
-                        }
-                    }catch(Exception ex){
-                        
-                    }

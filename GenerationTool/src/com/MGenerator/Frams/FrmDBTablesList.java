@@ -154,8 +154,6 @@ public class FrmDBTablesList extends javax.swing.JFrame {
         addTemplateRDBtn.setBounds(10, 30, 110, 20);
 
         fileChooserPnl.setLayout(null);
-
-        txtFile.setText("D:\\workspace\\SVN\\common\\GenerationTool\\mybatisTemplate.properties");
         fileChooserPnl.add(txtFile);
         txtFile.setBounds(-20, 0, 320, 20);
 
@@ -173,8 +171,6 @@ public class FrmDBTablesList extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 290, 410, 100);
-
-        saveToTxt.setText("C:/Users/m00309430/Documents/output");
         getContentPane().add(saveToTxt);
         saveToTxt.setBounds(20, 490, 200, 20);
 

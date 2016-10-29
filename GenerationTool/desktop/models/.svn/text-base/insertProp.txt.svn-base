@@ -1,7 +1,0 @@
-        if ({propName}TextField.getText() != null && !{propName}TextField.getText().isEmpty()) {
-            {classNamelow}Obj.set{propNameC}({propName}TextField.getText());
-        } else {
-            msgLabel.setText("you have to enter a valid {propName}");
-            msgLabel.setVisible(true);
-            return;
-        }

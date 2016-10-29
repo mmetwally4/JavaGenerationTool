@@ -1,6 +1,0 @@
-
-		    
-                    if({classNamelow}.get{propNameC}() == null){
-			    {classNamelow}.set{propNameC}(checkObj.get{propNameC}());
-
-		    }

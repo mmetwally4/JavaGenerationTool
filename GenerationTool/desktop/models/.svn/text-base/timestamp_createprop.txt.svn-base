@@ -1,2 +1,0 @@
-        {propName}DateChooser = new com.toedter.calendar.JDateChooser();
-	{propName}DateChooser.setDateFormatString("yyyy-MM-dd");

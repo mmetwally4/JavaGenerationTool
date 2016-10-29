@@ -81,7 +81,7 @@ public class Parser {
             ColumnBean col = null;
             String userDefinedKeys = prop.getProperty("userKeys");
 //        String value = prop.getProperty(userKey.replace("{", "").replace("}", ""));
-            String value = TemplateGenerator.getPropValue(userKey.replace("{", "").replace("}", ""), prop);
+            String value = TemplateGenerator.getPropValue(userKey.replace("{", "").replace("}", ""), prop,settingDetails);
             String fkvalue = "";
             String pkvalue = "";
             String[] types = MetaData.getKeysBundl().getString("types").split(",");
@@ -90,10 +90,10 @@ public class Parser {
                 return "";
             }
             if (userDefinedKeys.contains("fk_" + userKey.replace("{", "").replace("}", ""))) {
-                fkvalue = TemplateGenerator.getPropValue("fk_" + userKey.replace("{", "").replace("}", ""), prop);
+                fkvalue = TemplateGenerator.getPropValue("fk_" + userKey.replace("{", "").replace("}", ""), prop,settingDetails);
             }
             if (userDefinedKeys.contains("pk_" + userKey.replace("{", "").replace("}", ""))) {
-                pkvalue = TemplateGenerator.getPropValue("pk_" + userKey.replace("{", "").replace("}", ""), prop);
+                pkvalue = TemplateGenerator.getPropValue("pk_" + userKey.replace("{", "").replace("}", ""), prop,settingDetails);
             }
             String[] keys = MetaData.getKeysBundl().getString("basicKeys").split(",");
             SpecialTypesHandling sth;
@@ -102,7 +102,7 @@ public class Parser {
                     if (userDefinedKeys.contains(types[i] + "_" + userKey.replace("{", "").replace("}", ""))) {
                         sth = new SpecialTypesHandling();
                         sth.setType(types[i]);
-                        sth.setTypevalue(TemplateGenerator.getPropValue(types[i] + "_" + userKey.replace("{", "").replace("}", ""), prop));
+                        sth.setTypevalue(TemplateGenerator.getPropValue(types[i] + "_" + userKey.replace("{", "").replace("}", ""), prop,settingDetails));
                         if (sth.getTypevalue() != null && !sth.getTypevalue().isEmpty()) {
                             sth.setContainKeys(new ArrayList());
                             for (int c = 0; c < keys.length; c++) {
