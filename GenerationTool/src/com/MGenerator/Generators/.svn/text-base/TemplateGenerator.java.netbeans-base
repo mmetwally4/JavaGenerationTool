@@ -1,0 +1,316 @@
+/*
+ * TemplateGenerator.java
+ *
+ * Created on 06 September 2007, 19:40
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
+package com.MGenerator.Generators;
+
+import com.MGenerator.DataBaseLayer.TableBean;
+import com.MGenerator.Parsers.Parser;
+import com.MGenerator.metadata.MetaData;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Properties;
+
+/**
+ *
+ * @author mohamed.metwally
+ */
+public class TemplateGenerator extends Generator {
+
+    HashMap userKeysMap;
+
+    /**
+     * Creates a new instance of TemplateGenerator
+     */
+    public TemplateGenerator(TableBean tblBean, String templatePath, String daoPackage, String modelsPackage, String outPath) {
+    }
+
+    public TemplateGenerator() {
+    }
+
+    public static String getPropValue(String propName, Properties prop) {
+        String propVal = "";
+        if (propName.contains("_file")) {
+            propVal = prop.getProperty(propName);
+            File f = new File(propVal);
+            if (f.exists()) {
+                try {
+                    propVal = Parser.convertStreamToString(new FileInputStream(f));
+                } catch (Exception ex) {
+                    propVal = "";
+                }
+            } else {
+                propVal = "";
+            }
+
+        } else {
+            propVal = prop.getProperty(propName);
+        }
+        return propVal;
+    }
+
+    public void generate(TableBean tblBean, String path, String daoPackage, String modelsPackage, Properties prop) {
+        File file;
+        FileOutputStream fos = null;
+        userKeysMap = new HashMap();
+        String userDefinedKeys = prop.getProperty("userKeys");
+        String[] userKeys = userDefinedKeys.split(",");
+        for (int i = 0; i < userKeys.length; i++) {
+            if (!userKeys[i].contains("_tblrepeat")) {
+                userKeysMap.put(userKeys[i].replace("_repeat", "").replace("_file", ""), Parser.parseUserKey(prop, userKeys[i], tblBean, daoPackage, modelsPackage));
+            }
+        }
+        String propName = "";
+        String propVal = "";
+        String dirs = "";
+        boolean check = false;
+        String[] keys = MetaData.getKeysBundl().getString("basicKeys").split(",");
+        Enumeration enNames = prop.propertyNames();
+        while (enNames.hasMoreElements()) {
+            propName = enNames.nextElement().toString();
+            propVal = getPropValue(propName, prop);
+            check = false;
+            if (!userDefinedKeys.contains(propName) && !propName.equals("userKeys")) {
+                if (propName.contains("_repeat")) {
+                    try {
+                        if (propName.contains("table")) {
+                            try {
+                                dirs = path + "/" + daoPackage.replace(".", "/") + "/resources/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("table", tblBean.getTblName()));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                        } else if (propName.toLowerCase().contains("classdaobase")) {
+                            try {
+                                dirs = path + "/" + daoPackage.replace(".", "/") + "/base/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("classDAOBase", Parser.refineName(tblBean.getTblName(), 1) + "DAOBase"));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                            //classhandler
+                        } else if (propName.toLowerCase().contains("classdao")) {
+                            try {
+                                dirs = path + "/" + daoPackage.replace(".", "/") + "/dao/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("classDAO", Parser.refineName(tblBean.getTblName(), 1) + "DAO"));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                            //gwtclass
+                        } else if (propName.toLowerCase().contains("classhandler")) {
+                            try {
+                                dirs = path + "/" + daoPackage.replace(".", "/") + "/servlets/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("classhandler", Parser.refineName(tblBean.getTblName(), 1) + "Handler"));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                            //gwtclass
+                        } else if (propName.toLowerCase().contains("class.jsp")) {
+                            try {
+                                dirs = path + "/" + daoPackage.replace(".", "/") + "/Pages/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("class.jsp", Parser.refineName(tblBean.getTblName(), 1) + ".jsp"));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                            //gwtclass
+                        } else if (propName.toLowerCase().contains("modelpanel")) {
+                            try {
+                                dirs = path + "/" + daoPackage.replace(".", "/") + "/panels/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("modelPanel.java", Parser.refineName(tblBean.getTblName(), 1) + "Panel.java").replace("modelPanel.form", Parser.refineName(tblBean.getTblName(), 1) + "Panel.form"));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                            //gwtclass
+                        }else if (propName.toLowerCase().contains("modeltablemodel")) {
+                            try {
+                                dirs = path + "/" + daoPackage.replace(".", "/") + "/panels/models/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("modelTableModel", Parser.refineName(tblBean.getTblName(), 1) + "TableModel"));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                            //gwtclass
+                        }else if (propName.toLowerCase().contains("gwtclass")) {
+                            try {
+                                dirs = path + "/" + modelsPackage.replace(".", "/") + "/gwt/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("gwtclass", "Gwt" + Parser.refineName(tblBean.getTblName(), 1)));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                        } else if (propName.toLowerCase().contains("class.java")) {
+                            try {
+                                dirs = path + "/" + modelsPackage.replace(".", "/") + "/model/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("class", Parser.refineName(tblBean.getTblName(), 1)));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                        } else if (propName.toLowerCase().contains("class")) {
+                            try {
+                                dirs = path + "/" + modelsPackage.replace(".", "/") + "/";
+                                file = new File(dirs);
+                                file.mkdirs();
+                                file = new File(dirs + propName.replace("_repeat", "").replace("_file", "").replace("class", Parser.refineName(tblBean.getTblName(), 1)));
+                                file.createNewFile();
+                                fos = new FileOutputStream(file);
+                                check = true;
+                            } catch (IOException ex) {
+                                //LoggingClass.logInfo(ex.toString());
+                            }
+                        }
+                        if (check) {
+                            for (int i = 0; i < keys.length; i++) {
+                                if (propVal.contains(keys[i])) {
+                                    propVal = propVal.replace(keys[i], Parser.parseSystemKeys(tblBean, keys[i], null, daoPackage, modelsPackage, propVal));
+                                }
+                            }
+                            for (int i = 0; i < userKeys.length; i++) {
+                                if (!userKeys[i].contains("_tblrepeat")) {
+                                    if (propVal.contains(userKeys[i].replace("_repeat", "").replace("_file", ""))) {
+                                        propVal = propVal.replace(userKeys[i].replace("_repeat", "").replace("_file", ""), userKeysMap.get(userKeys[i].replace("_repeat", "").replace("_file", "")).toString());
+                                    }
+                                }
+                            }
+                            if (fos != null) {
+                                propVal = getStringToFile(propVal);
+                                fos.write(propVal.getBytes());
+                                fos.flush();
+                                try {
+                                    fos.close();
+                                } catch (Exception ex) {
+                                    //LoggingClass.logInfo(ex.toString());
+                                }
+                            }
+                        }
+                    } catch (IOException ex) {
+                        //LoggingClass.logInfo(ex.toString());
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    public String getStringToFile(String strToFile) {
+//        strToFile = strToFile.replace(";", ";\n");
+//        strToFile = strToFile.replace("{", "{\n");
+//        strToFile = strToFile.replace("}", "}\n");
+//        strToFile = strToFile.replace(">", ">\n");
+//        strToFile = strToFile.replace("*/", "*/\n");
+//        strToFile = strToFile.replace("\\*", "\\*\n");
+
+        //
+        return strToFile;
+    }
+
+    public void generate(ArrayList tblBeans, String path, String daoPackage, String modelsPackage, Properties prop) {
+        File file;
+        FileOutputStream fos = null;
+        userKeysMap = new HashMap();
+        String userDefinedKeys = prop.getProperty("userKeys");
+        String[] userKeys = userDefinedKeys.split(",");
+        for (int i = 0; i < userKeys.length; i++) {
+            if (userKeys[i].contains("_tblrepeat") || !userKeys[i].contains("repeat")) {
+                userKeysMap.put(userKeys[i].replace("_tblrepeat", ""), Parser.parseTableUserKey(prop, tblBeans, userKeys[i], daoPackage, modelsPackage));
+            }
+        }
+        String propName = "";
+        String propVal = "";
+        boolean check = false;
+        String[] keys = MetaData.getKeysBundl().getString("basicKeys").split(",");
+        Enumeration enNames = prop.propertyNames();
+        while (enNames.hasMoreElements()) {
+            propName = enNames.nextElement().toString();            
+            propVal = getPropValue(propName, prop);
+            propName = propName.replace("_file", "");
+            check = false;
+            if (!userDefinedKeys.contains(propName) && !propName.equals("userKeys")) {
+                if (!propName.contains("_repeat")) {
+                    try {
+                        file = new File(path + "/" + propName.replace("_file", ""));
+                        file.createNewFile();
+                        fos = new FileOutputStream(file);
+                    } catch (IOException ex) {
+                        //LoggingClass.logInfo(ex.toString());
+                    }
+                    for (int i = 0; i < keys.length; i++) {
+                        if (propVal.contains(keys[i])) {
+                            propVal = propVal.replace(keys[i], Parser.parseSystemKeys(null, keys[i], null, daoPackage, modelsPackage, propVal));
+                        }
+                    }
+                    for (int i = 0; i < userKeys.length; i++) {
+                        if (userKeys[i].contains("_tblrepeat") || !userKeys[i].contains("repeat")) {
+                            if (propVal.contains(userKeys[i].replace("_tblrepeat", ""))) {
+                                propVal = propVal.replace(userKeys[i].replace("_tblrepeat", ""), userKeysMap.get(userKeys[i].replace("_tblrepeat", "")).toString());
+                            }
+                        }
+                    }
+                    if (fos != null) {
+                        try {
+                            propVal = getStringToFile(propVal);
+                            fos.write(propVal.getBytes());
+                            fos.flush();
+                            fos.close();
+                        } catch (IOException ex) {
+                            //LoggingClass.logInfo(ex.toString());
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+}

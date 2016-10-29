@@ -1,0 +1,8 @@
+application.args=
+compile.on.save=false
+do.depend=false
+do.jar=true
+javac.debug=true
+javadoc.preview=true
+user.properties.file=C:\\Users\\mmetwally\\AppData\\Roaming\\NetBeans\\7.2\\build.properties
+axis2.deploy.dir=D:\\Metwally\\axisrun\\axis2-1.4.1

@@ -1,0 +1,10 @@
+
+					if (inputParam.get{propNameC}() != null && inputParam.get{propNameC}().toString() != null && !inputParam.get{propNameC}().toString().isEmpty()) {
+						if (!whereClause.toString().isEmpty()) {
+							whereClause.append(" and ");
+						}
+						whereClause
+								.append(" `{dbName}`.`{tblName}`.`{colName}` =  '");
+						whereClause.append(inputParam.get{propNameC}().toString());	
+						whereClause.append("'");						
+					}

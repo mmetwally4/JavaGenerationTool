@@ -1,0 +1,3 @@
+        {propName}Label = new javax.swing.JLabel();
+        {propName}Label.setText("{propName}");
+        {propName}Label.setPreferredSize(new java.awt.Dimension(66, 14));

@@ -1,0 +1,1 @@
+        {classNamelow}Obj.set{propNameC}((({fkClass}) {propName}ComboBox.getSelectedItem()).getId());

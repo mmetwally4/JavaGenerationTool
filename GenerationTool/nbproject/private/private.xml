@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
+        <file>
+            <url>src/com/MGenerator/Parsers/Parser.java</url>
+            <line>220</line>
+        </file>
+    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/com/MGenerator/Parsers/Parser.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>297</line>
+                <key/>
+            </bookmark>
+            <bookmark id="2">
+                <name/>
+                <line>300</line>
+                <key/>
+            </bookmark>
+            <bookmark id="0">
+                <name/>
+                <line>340</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Work/RoboCon/GenerationTool/src/com/MGenerator/Frams/FrmDBTablesList.java</file>
+            <file>file:/D:/Work/RoboCon/GenerationTool/src/com/MGenerator/Generators/Generator.java</file>
+            <file>file:/D:/Work/RoboCon/GenerationTool/src/keys.properties</file>
+            <file>file:/D:/Work/RoboCon/GenerationTool/src/com/MGenerator/Generators/TemplateGenerator.java</file>
+            <file>file:/D:/Work/RoboCon/GenerationTool/src/com/MGenerator/Parsers/Parser.java</file>
+        </group>
+    </open-files>
+</project-private>

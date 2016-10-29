@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer
+END
+SQLHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer/SQLHelper.java
+END
+DBBase.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer/DBBase.java
+END
+DbBase_1.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer/DbBase_1.java
+END
+ColumnBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer/ColumnBean.java
+END
+ForignKeyClass.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer/ForignKeyClass.java
+END
+DBMetaData.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer/DBMetaData.java
+END
+SpecialTypesHandling.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/Robocon/!svn/ver/85/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer/SpecialTypesHandling.java
+END
+TableBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/src/com/MGenerator/DataBaseLayer/TableBean.java
+END

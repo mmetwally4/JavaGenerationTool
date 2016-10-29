@@ -1,0 +1,7 @@
+		
+	<display:column title="{propNameC}" sortable="true" headerClass="sortable">
+		<%
+			record = ({className}) pageContext.getAttribute("row");
+			out.print(record.get{propNameC}());
+		%>
+	</display:column>

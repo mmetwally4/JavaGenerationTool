@@ -1,0 +1,1 @@
+	<Component id="{propName}CheckBox" min="-2" max="-2" attributes="0"/>

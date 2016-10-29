@@ -1,0 +1,11 @@
+		
+	<display:column title="{propNameC}" sortable="true" headerClass="sortable">
+		<%
+			record = ({className}) pageContext.getAttribute("row");
+			try{
+				out.print(record.get{propNameC}Obj().get{fstringpropNameC}());
+			}catch (Exception ex) {
+				out.print(record.get{propNameC}());
+            		}	
+		%>
+	</display:column>

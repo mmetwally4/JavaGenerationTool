@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/servletparams
+END
+boolean_getparams.txt
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/servletparams/boolean_getparams.txt
+END
+getparams.txt
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/servletparams/getparams.txt
+END
+timestamp_getparams.txt
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/servletparams/timestamp_getparams.txt
+END
+checkclassParams.txt
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/Robocon/!svn/ver/94/trunk/GenerationTool/servletparams/checkclassParams.txt
+END
+double_getparams.txt
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/servletparams/double_getparams.txt
+END
+int_getparams.txt
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/servletparams/int_getparams.txt
+END

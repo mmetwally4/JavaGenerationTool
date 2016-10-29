@@ -1,0 +1,8 @@
+	
+	private {propType} {propName};
+ 	public {propType} get{propNameC}() {
+ 		return {propName}; 
+	} 
+	public void set{propNameC}({propType} {propName}) { 
+		this.{propName} = {propName};
+	}

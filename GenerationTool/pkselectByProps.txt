@@ -1,0 +1,15 @@
+
+	  public static {className} selectBy{propNameC}({propType} {propName})  {
+		try {
+			return ({className}) DataAccessManager.queryForObject("{tblNamelow}_selectBy{propName}", {propName_getfkcheck});
+		} catch (Exception ex) {
+		    DataAccessManager.reloadSQLMap();
+		    LoggingHandler.logError(2, "","first attemp ", ex);
+		    try {
+				return ({className}) DataAccessManager.queryForObject("{tblNamelow}_selectBy{propName}", {propName_getfkcheck});
+		    } catch (Exception exp) {
+			LoggingHandler.logError(2, "","second attemp ", exp);
+			return null;
+		    }
+		}
+	   }

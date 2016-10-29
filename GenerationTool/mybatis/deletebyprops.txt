@@ -1,0 +1,19 @@
+
+	public static int deleteBy{propNameC}({propType} {propName})  { 
+		int rows = 0;
+		SqlSession sqlSession = DataAccessManager.getSessionFactory()
+				.openSession();
+		try {
+			rows = sqlSession.delete("{tblNamelow}_deleteBy{propName}", {propName});
+		} catch (Exception ex) {
+		    DataAccessManager.reloadSQLMap();
+		    LoggingHandler.logError(MetaData.LOGGER_NAME,"first attemp ", ex);
+		    try {
+				rows = sqlSession.delete("{tblNamelow}_deleteBy{propName}", {propName});
+		    } catch (Exception exp) {
+			LoggingHandler.logError(MetaData.LOGGER_NAME,"second attemp ", exp);
+			
+		    }
+		}
+		return rows;
+	   }

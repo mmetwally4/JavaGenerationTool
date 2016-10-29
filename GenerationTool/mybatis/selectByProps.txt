@@ -1,0 +1,15 @@
+
+	  public static List<{className}> selectBy{propNameC}({propType} {propName})  {
+		try {
+			return DataAccessManager.queryForList("{tblNamelow}_selectBy{propName}", {propName});
+		} catch (Exception ex) {
+		    DataAccessManager.reloadSQLMap();
+		    LoggingHandler.logError(MetaData.LOGGER_NAME,"first attemp ", ex);
+		    try {
+				return DataAccessManager.queryForList("{tblNamelow}_selectBy{propName}", {propName});
+		    } catch (Exception exp) {
+			LoggingHandler.logError(MetaData.LOGGER_NAME,"second attemp ", exp);
+			return null;
+		    }
+		}
+	   }

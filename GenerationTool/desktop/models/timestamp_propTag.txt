@@ -1,0 +1,1 @@
+                              <Component id="{propName}DateChooser" pref="121" max="32767" attributes="0"/>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="{tblNamelow}" >
+	<resultMap id="{tblNamelow}ResultMap" type="{className}_type" >
+		{columnMap}
+	</resultMap>    
+   <!-- <cacheModel  id="{tblNamelow}Cache" type="OSCACHE" >
+		<flushInterval  hours="24"/>
+		<flushOnExecute statement="{tblNamelow}_insertSelective"/>
+		<flushOnExecute statement="{tblNamelow}_updateByPrimaryKeySelective"/>
+		{deletebyflush}
+		<property name="reference-type" value="SOFT"/>        
+    </cacheModel>-->
+
+	{selectByALL}
+	
+	<select id="{tblNamelow}_max" resultType="{pkType}" > 
+		select max(`{pkColName}`) as maxid from `{dbName}`.`{tblName}`; 
+	</select>
+	<select id="{tblNamelow}_count" resultType="java.lang.Integer" > 
+		select count(*) from `{dbName}`.`{tblName}`; 
+	</select>
+	<select id="{tblNamelow}_selectAll" resultMap="{tblNamelow}ResultMap"  > 
+		select * from `{dbName}`.`{tblName}` ; 
+	</select>
+
+	<select id="{tblNamelow}_search" resultMap="{tblNamelow}ResultMap"  > 
+	select * from `{dbName}`.`{tblName}` where ${value}
+	</select>
+
+	{deleteByALL}
+	
+	<delete id="{tblNamelow}_custom">
+		delete from
+		`{dbName}`.`{tblName}` where ${value}
+	</delete>
+	<insert id="{tblNamelow}_insertSelective" parameterType="{className}_type" >
+		insert into `{dbName}`.`{tblName}` 
+		(
+		{isNullColmns}
+		)
+		values
+		(
+		{isNullProps}
+		)
+		
+		<selectKey resultType="{pkType}" keyProperty="{pkPropName}"> 
+		select last_insert_id() as {pkColName}
+		</selectKey> 
+	</insert>
+	<update id="{tblNamelow}_updateByPrimaryKeySelective"  parameterType="{className}_type" > 
+		update `{dbName}`.`{tblName}` set `{dbName}`.`{tblName}`.`{pkColName}` = #{{pkPropName}}		
+			{isNullUpdate} 		
+		where `{dbName}`.`{tblName}`.`{pkColName}` = #{{pkPropName}}
+		</update> 
+</mapper>

@@ -1,0 +1,17 @@
+
+			@POST
+			@Path("/{classNamelow}request")
+			@Produces("application/json")
+			// @Consumes("application/json")
+			public {className}RequestBean handleTest{className}Request() {
+				return new {className}RequestBean();
+			}
+
+			
+			@POST
+			@Path("/{classNamelow}response")
+			@Produces("application/json")
+			// @Consumes("application/json")
+			public {className}ResponseBean handleTest{className}Response() {
+				return new {className}ResponseBean();
+			}

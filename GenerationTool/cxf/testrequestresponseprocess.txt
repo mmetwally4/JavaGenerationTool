@@ -1,0 +1,35 @@
+			
+			if(operationName.equals("handleTest{className}Request")){
+				{className}RequestBean {classNamelow}RequestBean = new {className}RequestBean();
+				output = {className}DAO.selectAll();
+				{classNamelow}RequestBean.getPagingModel().setPageSize(10);
+				{classNamelow}RequestBean.getPagingModel().setPageId(1);
+				{classNamelow}RequestBean.getSortingModel().setsortBy("id");
+				{classNamelow}RequestBean.getSortingModel().sortBhv("asc");
+				{classNamelow}RequestBean.getFilterationModel().setEnableFilter(true);
+				{classNamelow}RequestBean.getFilterationModel().setFiter("11111");
+				{classNamelow}RequestBean.getRequestHeader().setOperationType(2);
+				{classNamelow}RequestBean.getRequestHeader().setTimestamp(Calendar.getInstance().getTime());
+				{classNamelow}RequestBean.getRequestHeader().setChannel("APP");
+				{classNamelow}RequestBean.getRequestHeader().setRequestId("1234");
+				{classNamelow}RequestBean.getRequestHeader().setUser("APPUser");
+				{classNamelow}RequestBean.getRequestHeader().setTransactionId("1234");				
+				if(output != null && !output.isEmpty()){
+					{classNamelow}RequestBean.set{className}(({className}) output.get(0));
+				}
+				exchange.getIn().setBody({classNamelow}RequestBean);
+			}
+			if(operationName.equals("handleTest{className}Response")){
+				{className}ResponseBean {classNamelow}ResponseBean = new {className}ResponseBean();
+				output = {className}DAO.selectAll();
+				{classNamelow}ResponseBean.getResponseHeader().setResponseCodeEnum(
+										ResponseCodes.SUCCESS);
+				if(output != null){
+					{classNamelow}ResponseBean.getPagingModel().setTotalSize(
+										output.size());
+				}else{
+					{classNamelow}ResponseBean.getPagingModel().setTotalSize(0);
+				}
+				{classNamelow}ResponseBean.set{className}s(output);
+				exchange.getIn().setBody({classNamelow}ResponseBean);
+			}

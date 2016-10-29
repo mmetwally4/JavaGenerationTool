@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Camel Context -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://cxf.apache.org/blueprint/core"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xmlns:jaxws="http://cxf.apache.org/blueprint/jaxws" xmlns:camelcxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="	
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd             
+             http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
+             http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+             		http://cxf.apache.org/transports/http/configuration
+    	http://cxf.apache.org/schemas/configuration/http-conf.xsd
+    	http://cxf.apache.org/configuration/security 
+   		http://cxf.apache.org/schemas/configuration/security.xsd">
+	
+
+	<bean id="shutdown" class="org.apache.camel.impl.DefaultShutdownStrategy">
+			<property name="timeout" value="10" />
+		</bean>
+
+	    {classesProcessors} 
+	<cm:property-placeholder id="{contextpath}apibrokerproperty"
+		persistent-id="com.huawei.{contextpath}apibroker">
+	</cm:property-placeholder>
+
+	<camelcxf:rsServer id="restServiceServer" address="http://localhost:10001/api"
+		loggingFeatureEnabled="true">
+		<camelcxf:serviceBeans>
+		{classesManagers}			
+		</camelcxf:serviceBeans>
+		<camelcxf:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+			<bean class="com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider" />
+		</camelcxf:providers>
+	</camelcxf:rsServer>
+	
+	
+</blueprint>

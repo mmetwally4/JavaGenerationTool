@@ -1,0 +1,1 @@
+	{propName}TextField.setText("");

@@ -1,0 +1,9 @@
+
+					if (inputParam.get{propNameC}() != null) {
+						if (!whereClause.toString().isEmpty()) {
+							whereClause.append(" and ");
+						}
+						whereClause
+								.append(" `{dbName}`.`{tblName}`.`{colName}` =  ");
+						whereClause.append(inputParam.get{propNameC}());						
+					}

@@ -1,0 +1,17 @@
+
+	public static int deleteBy{propNameC}({propType} {propName})  { 
+		int rows = 0;
+		try {
+			rows = DataAccessManager.getSqlMapper().delete("{tblNamelow}_deleteBy{propName}", {propName});
+		} catch (Exception ex) {
+		    DataAccessManager.reloadSQLMap();
+		    LoggingHandler.logError(2, "","first attemp ", ex);
+		    try {
+				rows = DataAccessManager.getSqlMapper().delete("{tblNamelow}_deleteBy{propName}", {propName});
+		    } catch (Exception exp) {
+			LoggingHandler.logError(2, "","second attemp ", exp);
+			
+		    }
+		}
+		return rows;
+	   }

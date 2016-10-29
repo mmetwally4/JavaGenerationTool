@@ -1,0 +1,1 @@
+        {propName}CheckBox = new javax.swing.JCheckBox();

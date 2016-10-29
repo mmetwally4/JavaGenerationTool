@@ -1,0 +1,7 @@
+		List<{fkClass}> {propName}s = {fkClass}DAO.selectAll();
+		if({propName}s == null){
+			{propName}s = new ArrayList<{fkClass}>();
+		}
+		for ({fkClass} {propName}Obj : {propName}s) {
+		    {propName}ComboBox.addItem({propName}Obj);
+		}

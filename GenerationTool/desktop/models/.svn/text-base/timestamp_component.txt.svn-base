@@ -1,0 +1,10 @@
+        <Component class="com.toedter.calendar.JDateChooser" name="{propName}DateChooser">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="{propName}Label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="{propName}"/>
+          </Properties>
+        </Component>

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/src
+END
+logback.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/logback.xml
+END
+DataBaseTypes.properties
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/DataBaseTypes.properties
+END
+keys.properties
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/src/keys.properties
+END

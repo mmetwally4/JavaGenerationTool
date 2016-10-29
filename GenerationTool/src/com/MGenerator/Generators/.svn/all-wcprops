@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/src/com/MGenerator/Generators
+END
+TemplateGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/Robocon/!svn/ver/173/trunk/GenerationTool/src/com/MGenerator/Generators/TemplateGenerator.java
+END
+ControlLayerGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/com/MGenerator/Generators/ControlLayerGenerator.java
+END
+DBStoredProcedureGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/com/MGenerator/Generators/DBStoredProcedureGenerator.java
+END
+Generator.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Robocon/!svn/ver/85/trunk/GenerationTool/src/com/MGenerator/Generators/Generator.java
+END
+VisualLayerGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/com/MGenerator/Generators/VisualLayerGenerator.java
+END
+DBLayerGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/Robocon/!svn/ver/83/trunk/GenerationTool/src/com/MGenerator/Generators/DBLayerGenerator.java
+END

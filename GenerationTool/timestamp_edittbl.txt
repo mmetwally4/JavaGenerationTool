@@ -1,0 +1,29 @@
+		
+                        <tr>
+                            <td >{propNameC}</td>
+                        </tr>
+			<tr>
+                            <td>
+                                <%
+        String date{propNameC} = "";
+        if (edit{className} != null && edit{className}.get{propNameC}() != null) {
+            java.text.SimpleDateFormat writeDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            date{propNameC} = writeDateFormat.format(new Date(edit{className}.get{propNameC}().getTime()));
+        }
+                                %>
+                                <input type="text" name="{propName}" value="<%=date{propNameC}%>"  id="{propName}date" readonly="1" style="width:220px;height:24px;border:1px #C0C0C0 solid;font-family:Arial;font-size:13px;"/>
+                                <img src="/<%=com.{contextpath}.servlet.PagesFilter.contextPath%>/jscalendar/img.gif" id="f_trigger_{propName}" style="cursor: pointer; border: 1px solid red;" title="Date selector1"
+                                     onmouseover="this.style.background='blue';" onmouseout="this.style.background=''" />
+                                <script type="text/javascript">
+                                    Calendar.setup({
+                                        inputField     :    "{propName}date",     // id of the input field
+                                        ifFormat       :    "%Y-%m-%d",      // format of the input field
+                                        button         :    "f_trigger_{propName}",  // trigger for the calendar (button ID)
+                                        align          :    "Tl",           // alignment (defaults to "Bl")
+                                        singleClick    :    true,
+                                        range          :    [2000,2099]
+                                    });
+                                </script>
+                            </td>
+                        </tr>
+                 

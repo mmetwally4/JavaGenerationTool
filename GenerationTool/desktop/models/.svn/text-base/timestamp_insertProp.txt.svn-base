@@ -1,0 +1,7 @@
+        if ({propName}DateChooser.getDate() != null) {
+            {classNamelow}Obj.set{propNameC}(new Timestamp({propName}DateChooser.getDate().getTime()));
+        } else {
+            msgLabel.setText("you have to enter a valid {propName}");
+            msgLabel.setVisible(true);
+            return;
+        }

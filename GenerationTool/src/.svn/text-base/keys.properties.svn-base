@@ -1,0 +1,3 @@
+basicKeys={driver},{connStr},{userName},{password},{daoPath},{daoPkName},{packageName},{className},{classNamelow},{tblNamelow},{tblName},{tblIndex},{colName},{colIndex},{pkType},{pkColName},{pkPropName},{pkPropNameC},{propName},{propType},{propNameC},{fkCol},{fkClass},{fkClasslow},{fkTable},{isFK},{isPK},{propName_fkcheck},{equalorlike},{propName_getfkcheck},{empty},{fstringpropName},{fstringpropNameC},{propName_string},{propNameC_string},{preString},{afterString},{fstringcolName},{fstringcolNameC},{columnsCount}
+types=boolean,int,long,float,double,byte[],java.sql.Date,String,java.sql.Time,java.math.BigDecimal,Clob,Blob,Ref,Array,Integer,Boolean,Double,Timestamp
+

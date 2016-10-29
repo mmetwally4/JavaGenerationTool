@@ -1,0 +1,1 @@
+        {propName}DateChooser.setDate(null);
