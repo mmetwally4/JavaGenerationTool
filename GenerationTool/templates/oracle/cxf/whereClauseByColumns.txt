@@ -1,0 +1,11 @@
+
+					if (inputParam.get{propNameC}() != null && !inputParam.get{propNameC}().toString().isEmpty() && 
+					!inputParam.get{propNameC}().toString().equalsIgnoreCase("null")) {
+						if (!whereClause.toString().isEmpty()) {
+							whereClause.append(" and ");
+						}
+						whereClause
+								.append(" {userName}.{tblName}.{colName}  {equalorlike}  '");
+						whereClause.append(inputParam.get{propNameC}());	
+						whereClause.append("'");						
+					}

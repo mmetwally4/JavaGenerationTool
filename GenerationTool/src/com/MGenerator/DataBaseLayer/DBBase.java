@@ -35,7 +35,8 @@ public class DBBase {
         this.userName = userName;
         this.password = password;
         this.portNum = portNum;
-        this.type = type;        
+        this.type = type;    
+        MetaData.setType(type);        
         MetaData.setUserName(userName);
         MetaData.setPassword(password);
         

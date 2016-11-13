@@ -1,0 +1,8 @@
+    <servlet>
+        <servlet-name>{className}Handler</servlet-name>
+        <servlet-class>com.{contextpath}.servlets.handlers.{className}Handler</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>{className}Handler</servlet-name>
+        <url-pattern>/{className}Handler</url-pattern>
+    </servlet-mapping>

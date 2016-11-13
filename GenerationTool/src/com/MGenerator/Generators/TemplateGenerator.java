@@ -54,6 +54,7 @@ public class TemplateGenerator extends Generator {
                 System.err.println("propName is File path = " + filePath.toString());
                 File f = new File(filePath.toString());
                 if (f.exists()) {
+                    System.err.println("propName is File path = " + filePath.toString()+ " exists");
                     try {
                         propVal = Parser.convertStreamToString(new FileInputStream(f));
                     } catch (Exception ex) {

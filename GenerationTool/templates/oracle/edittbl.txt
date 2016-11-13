@@ -1,0 +1,9 @@
+
+                        <tr>
+                            <td >{propNameC}</td>
+                        </tr>
+			<tr>
+                            <td>
+                                <input type="text" name="{propName}" value="<%if (edit{className} != null && edit{className}.get{propNameC}() != null) { %><%=edit{className}.get{propNameC}()%><%}else{%><%}%>"  style="width:250px;height:24px;border:1px #C0C0C0 solid;font-family:Arial;font-size:13px;"/>
+                            </td>
+                        </tr>

@@ -52,8 +52,8 @@
         <thead>
 		<tr>
 		{tableheader}
-		<th><u></u></th>
-        <th><u></u></th>
+		<th><u>Edit</u></th>
+        <th><u>Delete</u></th>
 		</tr>          
         </thead>
         <tbody>

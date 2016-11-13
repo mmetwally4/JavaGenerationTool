@@ -1,0 +1,4 @@
+
+	public static int deleteBy{propNameC}({propType} {propName})  { 
+		return DataAccessManager.delete("{tblNamelow}_deleteBy{propName}", {propName});		
+	}

@@ -118,7 +118,7 @@
                 <form name="{classNamelow}handlerFrm" action="/<%=com.vermilion.servlet.PagesFilter.contextPath%>/{className}Handler" method="post">
                     <table>
 					<%if (edit{className} != null) {%>
-					<tr><td><input type="hidden" name="{classNamelow}Id" value="<%=edit{className}.getId()%>"/></td></tr>
+					<tr><td><input type="hidden" name="id" value="<%=edit{className}.getId()%>"/></td></tr>
 					<%}%>
 					{edittbl}
                        

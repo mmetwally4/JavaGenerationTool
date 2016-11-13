@@ -1,0 +1,12 @@
+			<td>
+	<%			
+			try{
+				if(record.get{propNameC}Obj() != null){
+				out.print(record.get{propNameC}Obj().toString());
+				}else{
+					out.print("");
+				}
+			}catch (Exception ex) {
+				out.print(record.get{propNameC}());
+            		}	
+		%></td>

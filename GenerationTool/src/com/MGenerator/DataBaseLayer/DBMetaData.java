@@ -8,6 +8,7 @@
  */
 package com.MGenerator.DataBaseLayer;
 
+import com.MGenerator.metadata.MetaData;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -42,7 +43,7 @@ public class DBMetaData {
         tabelsMap = new HashMap();
         types[0] = "TABLE";
         int index = 1;
-        ResultSet rs = dbMetaData.getTables(catalog, null, "%", types);
+        ResultSet rs = dbMetaData.getTables(catalog, MetaData.getOracleScheme(), "%", types);
         while (rs.next()) {
             tblBean = new TableBean();
             tblBean.setTblIndex(index);
@@ -84,7 +85,7 @@ public class DBMetaData {
         ArrayList pks = getPK(tblBean.getTblName());
         ForignKeyClass fkObj;
         boolean firstString = false;
-        ResultSet rs = dbMetaData.getColumns(catalog, null, tblBean.getTblName(), "%");
+        ResultSet rs = dbMetaData.getColumns(catalog, MetaData.getOracleScheme(), tblBean.getTblName(), "%");
         int index = 1;
         while (rs.next()) {
             colBean = new ColumnBean();
@@ -135,8 +136,11 @@ public class DBMetaData {
             throws SQLException {
         java.sql.Statement s = conn.createStatement(
                 ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+        if(MetaData.getType() == 3){ //mysql
+            tblName = "`"+tblName+"`";
+        }
         ResultSet rs = s.executeQuery(
-                "SELECT * FROM `" + tblName + "` WHERE 1 = 0");
+                "SELECT * FROM " + tblName + " WHERE 1 = 0");
         java.sql.ResultSetMetaData meta = rs.getMetaData();
         int columnCount = meta.getColumnCount();
         ArrayList results = new ArrayList();
@@ -152,7 +156,7 @@ public class DBMetaData {
     private HashMap getFK(String tableName) {
         HashMap fKs = new HashMap();
         try {
-            ResultSet rs = dbMetaData.getExportedKeys(catalog, null, tableName);
+            ResultSet rs = dbMetaData.getExportedKeys(catalog, MetaData.getOracleScheme(), tableName);
             String result = "";
             ForignKeyClass fkCalss;
             TableBean tblBean;
@@ -178,7 +182,7 @@ public class DBMetaData {
 
     private ArrayList getPK(String tableName) throws SQLException {
         ArrayList pKs = new ArrayList();
-        ResultSet rs = dbMetaData.getPrimaryKeys(catalog, null, tableName);
+        ResultSet rs = dbMetaData.getPrimaryKeys(catalog, MetaData.getOracleScheme(), tableName);
         String result = "";
         while (rs.next()) {
             result = rs.getString("COLUMN_NAME");

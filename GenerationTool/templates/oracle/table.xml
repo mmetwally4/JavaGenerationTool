@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="{tblNamelow}" >
+	<resultMap id="{tblNamelow}ResultMap" class="{daoPkName}.model.{className}" >
+		{columnMap}
+	</resultMap>    
+    <cacheModel  id="{tblNamelow}Cache" type="OSCACHE" >
+		<flushInterval  hours="24"/>
+		<flushOnExecute statement="{tblNamelow}_insertSelective"/>
+		<flushOnExecute statement="{tblNamelow}_updateByPrimaryKeySelective"/>
+		{deletebyflush}
+		<property name="reference-type" value="SOFT"/>        
+    </cacheModel>
+
+	{selectByALL}
+	<select id="{tblNamelow}_max" resultClass="{pkType}" > 
+		select max({pkColName}) as maxid from {userName}.{tblName} 
+	</select>
+	<select id="{tblNamelow}_count" resultClass="java.lang.Integer" > 
+		select count(*) from {dbName}.{tblName} 
+	</select>
+	<select id="{tblNamelow}_selectAll" resultMap="{tblNamelow}ResultMap" cacheModel="{tblNamelow}Cache" > 
+		select * from {dbName}.{tblName}  
+	</select>
+
+	<select id="{tblNamelow}_search" resultMap="{tblNamelow}ResultMap" cacheModel="{tblNamelow}Cache"> 
+	select * from {dbName}.{tblName} where $value$ 
+	</select>
+
+	{deleteByALL}
+	<insert id="{tblNamelow}_insertSelective" parameterClass="{daoPkName}.model.{className}" >
+		insert into {dbName}.{tblName} 
+		<dynamic prepend="(" > 
+			{isNullColmns} )
+		</dynamic>
+		values 
+		<dynamic prepend="(" > 
+			{isNullProps} ) 
+		</dynamic> 
+		<selectKey resultClass="{pkType}" keyProperty="{pkPropName}"> 
+		select last_insert_id() as {pkColName}
+		</selectKey> 
+	</insert>
+	<update id="{tblNamelow}_updateByPrimaryKeySelective" parameterClass="{daoPkName}.model.{className}" > 
+		update {dbName}.{tblName}
+		<dynamic prepend="set" > 
+			{isNullUpdate} 
+		</dynamic> 
+		where {dbName}.{tblName}.{pkColName} = #{pkPropName}# 
+		</update> 
+</sqlMap>

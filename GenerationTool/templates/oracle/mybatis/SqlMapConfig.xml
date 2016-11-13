@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="logImpl" value="LOG4J" />
+	</settings>
+	<typeAliases>		
+		{typealiases}
+	</typeAliases>		
+   <environments default="env">
+		<environment id="env">
+			<transactionManager type="JDBC">
+				<property name="commitRequired" value="false" />
+			</transactionManager>
+			<dataSource type="BoneCP">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+				<property name="bonecp.idleConnectionTestPeriod" value="60" />
+				<property name="bonecp.idleMaxAge" value="600" />
+				<property name="bonecp.maxConnectionsPerPartition" value="20" />
+				<property name="bonecp.minConnectionsPerPartition" value="10" />
+				<property name="bonecp.partitionCount" value="3" />
+				<property name="bonecp.acquireIncrement" value="3" />
+				<property name="bonecp.statementsCacheSize" value="300" />
+				<!-- <property name="bonecp.releaseHelperThreads" value="10" /> -->
+				<property name="bonecp.logStatementsEnabled" value="false" />
+				<property name="bonecp.resetConnectionOnClose" value="true" />
+				<!-- <property name="bonecp.statementReleaseHelperThreads" -->
+				<!-- value="20" /> -->
+				<property name="bonecp.connectionTestStatement" value="select 1" />
+				<property name="bonecp.maxConnectionAge" value="300000" />
+				<property name="bonecp.closeOpenStatements" value="true" />
+
+			</dataSource>
+
+		</environment>
+	</environments>
+<mappers>
+	
+{mapresource}
+</mappers>
+</configuration>

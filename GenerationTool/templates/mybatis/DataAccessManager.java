@@ -413,6 +413,99 @@ public static void initCamel() {
         return copyObject(result);
     }
 	
+
+	public static int delete(String deleteStatment, Object param) {
+		int rows = 0;
+		SqlSession sqlSession = DataAccessManager.getSessionFactory()
+				.openSession();
+		try {
+			if (param != null) {
+				rows = sqlSession.delete(deleteStatment, param);
+			} else {
+				rows = sqlSession.delete(deleteStatment);
+			}
+			sqlSession.commit();
+		} catch (Exception ex) {
+			// DataAccessManager.reloadSQLMap();
+			LoggingHandler.logError(MetaData.LOGGER_NAME, "first attemp ", ex);
+			try {
+				if (param != null) {
+					rows = sqlSession.delete(deleteStatment, param);
+				} else {
+					rows = sqlSession.delete(deleteStatment);
+				}
+				sqlSession.commit();
+			} catch (Exception exp) {
+				LoggingHandler.logError(MetaData.LOGGER_NAME, "second attemp ",
+						exp);
+
+			}
+		}
+		return rows;
+	}
+
+	public static Integer insert(String insertStatment, Object paramter) {
+		SqlSession sqlSession = DataAccessManager.getSessionFactory()
+				.openSession();
+		Integer rows = 0;
+		if (insertStatment == null || insertStatment.isEmpty()) {
+			insertStatment = "company_insertSelective";
+		}
+		try {
+			String transId = "";
+
+			if (paramter != null) {
+				if (sqlSession != null) {
+					LoggingHandler.logInfo(MetaData.LOGGER_NAME,
+							"logging in DB ", insertStatment);
+
+					rows = sqlSession.insert(insertStatment, paramter);
+					sqlSession.commit();
+					LoggingHandler.logInfo(MetaData.LOGGER_NAME, "inserted ",
+							String.valueOf(rows));
+				}
+			} else {
+				LoggingHandler.logInfo(MetaData.LOGGER_NAME,
+						"logging in DB failed empty object ");
+			}
+
+		} catch (Exception ex) {
+			LoggingHandler.logError(MetaData.LOGGER_NAME, "", ex);
+		} finally {
+			sqlSession.close();
+		}
+		return rows;
+	}
+
+	public static Integer update(String updateStatment, Object paramter) {
+		SqlSession sqlSession = DataAccessManager.getSessionFactory()
+				.openSession();
+		Integer rows = 0;
+		try {
+
+			if (paramter != null) {
+				if (sqlSession != null) {
+					LoggingHandler.logInfo(MetaData.LOGGER_NAME,
+							"logging in DB ", updateStatment);
+
+					rows = sqlSession.update(updateStatment, paramter);
+					sqlSession.commit();
+					LoggingHandler.logInfo(MetaData.LOGGER_NAME, "inserted ",
+							String.valueOf(rows));
+				}
+			} else {
+				LoggingHandler.logInfo(MetaData.LOGGER_NAME,
+						"logging in DB failed empty object ");
+			}
+
+		} catch (Exception ex) {
+			LoggingHandler.logError(MetaData.LOGGER_NAME, "", ex);
+		} finally {
+			sqlSession.close();
+		}
+		return rows;
+	}
+
 	
 	public void close() {
 		if (this.sqlSession != null) {

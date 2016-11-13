@@ -1,0 +1,26 @@
+                        <tr>
+                            <td >{propNameC}</td>
+                        </tr>
+			<tr>
+                            <td>
+                                <select name="{propName}"  style="width:250px;height:24px;border:1px #C0C0C0 solid;font-family:Arial;font-size:13px;">
+									<option value="">--</option>
+
+                                    <%
+	List<{fkClass}> {fkClasslow}Fks = {fkClass}DAO.selectAll();
+        int {fkClasslow}Id = 0;
+        if (edit{className} != null && edit{className}.get{propNameC}() != null) {
+            {fkClasslow}Id = edit{className}.get{propNameC}();
+        }
+         {fkClass}  {fkClasslow}Obj;
+        if ({fkClasslow}Fks != null)
+            for (int i = 0; i < {fkClasslow}Fks.size(); i++) {
+                {fkClasslow}Obj = ({fkClass}) {fkClasslow}Fks.get(i);
+                                    %>
+                                    <option value="<%={fkClasslow}Obj.getId()%>" <%if ({fkClasslow}Id == {fkClasslow}Obj.getId().intValue()) {%>selected<%}%> ><%={fkClasslow}Obj.toString()%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                        </tr>

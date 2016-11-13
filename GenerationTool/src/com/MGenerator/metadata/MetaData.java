@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.MGenerator.metadata;
 
 import java.util.ResourceBundle;
@@ -19,10 +18,13 @@ public class MetaData {
     private static String userName;
     private static String password;
     private static String dbName;
+    private static Integer type;
+    private static String oracleScheme = null;
+
     //{driver},{connStr},{userName},{password}
-    static{
+    static {
         setKeysBundl(ResourceBundle.getBundle("keys"));
-        
+
     }
 
     public static String getDbName() {
@@ -33,8 +35,6 @@ public class MetaData {
         MetaData.dbName = dbName;
     }
 
-    
-    
     /**
      * @return the keysBundl
      */
@@ -89,6 +89,7 @@ public class MetaData {
      */
     public static void setUserName(String aUserName) {
         userName = aUserName;
+        setOracleScheme(userName);
     }
 
     /**
@@ -105,8 +106,32 @@ public class MetaData {
         password = aPassword;
     }
 
-    
+    /**
+     * @return the type
+     */
+    public static Integer getType() {
+        return type;
+    }
 
-    
+    /**
+     * @param aType the type to set
+     */
+    public static void setType(Integer aType) {
+        type = aType;
+    }
+
+    /**
+     * @return the oracleScheme
+     */
+    public static String getOracleScheme() {
+        return oracleScheme;
+    }
+
+    /**
+     * @param aOracleScheme the oracleScheme to set
+     */
+    public static void setOracleScheme(String aOracleScheme) {
+        oracleScheme = aOracleScheme;
+    }
 
 }
